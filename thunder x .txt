@@ -1,0 +1,35 @@
+CREATE DATABASE Cod_E_thon;
+GO
+USE Cod_E_thon;
+GO
+
+-- Users Table for Registration and Login
+CREATE TABLE Users (
+    UserId INT PRIMARY KEY IDENTITY(1,1),
+    Username NVARCHAR(100) NOT NULL,
+    Password NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(100) NOT NULL
+);
+
+-- UserDetails Table for Personal Information (age, weight, etc.)
+CREATE TABLE UserDetails (
+    UserDetailsId INT PRIMARY KEY IDENTITY(1,1),
+    UserId INT FOREIGN KEY REFERENCES Users(UserId),
+    Age INT,
+    BodyWeight DECIMAL(5,2),
+    Goal NVARCHAR(100) -- Weight loss, muscle gain, etc.
+);
+
+-- DietPlans Table for Personalized Diet Plans
+CREATE TABLE DietPlans (
+    DietPlanId INT PRIMARY KEY IDENTITY(1,1),
+    UserId INT FOREIGN KEY REFERENCES Users(UserId),
+    DietDescription NVARCHAR(1000)
+);
+
+-- WorkoutPlans Table for Personalized Workout Plans
+CREATE TABLE WorkoutPlans (
+    WorkoutPlanId INT PRIMARY KEY IDENTITY(1,1),
+    UserId INT FOREIGN KEY REFERENCES Users(UserId),
+    WorkoutDescription NVARCHAR(1000)
+);
